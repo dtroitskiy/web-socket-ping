@@ -1,10 +1,10 @@
 const fs = require('fs');
-const http = require('http');
+// const http = require('http');
 const WebSocket = require('ws');
 const port = process.env.PORT || 8002;
 
 // http
-const server = http.createServer(function(req, res)
+/*const server = http.createServer(function(req, res)
 {
 	if (req.url == '/')
 	{
@@ -24,10 +24,11 @@ const server = http.createServer(function(req, res)
 		res.write(message404);
 		res.end();
 	}
-});
+});*/
 
 // WebSocket
-const wss = new WebSocket.Server({ server });
+// const wss = new WebSocket.Server({ server });
+const wss = new WebSocket.Server({ 'port': port });
 
 wss.on('connection', function connection(ws)
 {
@@ -45,7 +46,7 @@ wss.on('connection', function connection(ws)
 	});
 });
 
-server.listen(port);
+// server.listen(port);
 
 console.log('Listening to %d', port);
 

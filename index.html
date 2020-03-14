@@ -12,13 +12,15 @@
 			
 			document.addEventListener('DOMContentLoaded', function()
 			{
-				const ws = new WebSocket('ws://' + location.host);
+				// const ws = new WebSocket('ws://' + location.host);
+				const ws = new WebSocket('ws://localhost:8002');
 
 				const latencyElem = document.querySelector('#latency');
 				
 				let time = 0;
 				function ping()
 				{
+					if (ws.readyState != ws.OPEN) return;
 					time = Date.now();
 					ws.send('ping');
 				}
