@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style type="text/css">
+			*
+			{
+				font: 12pt monospace;
+			}
+		</style>
+		<script type="text/javascript">
+			'use strict';
+			
+			document.addEventListener('DOMContentLoaded', function()
+			{
+				const ws = new WebSocket('ws://' + location.host);
+
+				const latencyElem = document.querySelector('#latency');
+				
+				let time = 0;
+				function ping()
+				{
+					time = Date.now();
+					ws.send('ping');
+				}
+
+				ws.addEventListener('open', function(event)
+				{
+					console.log('Connected');
+					requestAnimationFrame(ping);		
+				});
+				
+				ws.addEventListener('close', function(event)
+				{
+					console.log('Disconnected');
+				});
+
+				ws.addEventListener('message', function()
+				{
+					console.log('Pong received');
+					latencyElem.innerText = Math.round((Date.now() - time) / 2);
+					setTimeout(requestAnimationFrame.bind(window, ping), 1000);
+				});
+
+				ws.addEventListener('error', function(event)
+				{
+					console.log('Error: ', event.data);
+				});
+			});
+		</script>
+	</head>
+	<body>
+		Latency: <span id="latency">999</span> ms
+	</body>
+</html>
+
