@@ -12,7 +12,8 @@
 			
 			document.addEventListener('DOMContentLoaded', function()
 			{
-				const ws = new WebSocket('ws://' + location.host);
+				const protocol = location.host.indexOf('heroku') != -1 ? 'wss://' : 'ws://';
+				const ws = new WebSocket(protocol + location.host);
 
 				const latencyElem = document.querySelector('#latency');
 				
