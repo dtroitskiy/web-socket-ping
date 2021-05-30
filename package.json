@@ -9,7 +9,7 @@
 	"author": "Stranger",
 	"license": "MIT",
 	"dependencies": {
-		"ws": "^7.2.3",
+		"ws": "^7.4.6",
 		"nodemon": "^2.0.2"
 	}
 }
